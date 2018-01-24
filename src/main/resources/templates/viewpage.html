@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Edit item</title>
+    <script th:src="@{/js/main.js}" />
+
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h2 th:text="${item.title}"></h2>
+
+    <p class="well well-sm"
+         th:text="${item.text}">
+    </p>
+
+    <th:block th:if="${!item.comments.isEmpty()}">
+        <p><strong>Comments:</strong></p>
+        <th:block th:each="comment: ${item.comments}">
+            <div class="well well-sm">
+                <p th:text="${comment.text}"></p>
+            </div>
+        </th:block>
+    </th:block>
+
+
+    <p>
+        <a href="#" th:onclick="|leaveComment(${item.id})|" th:id="|comment-link-${item.id}|">
+
+    <p>
+        <button type="submit" class="btn btn-success">
+            <span aria-hidden="true"></span> Add comment
+        </button>
+    </p>
+    </a></p>
+
+    <div class="hidden" th:id="|comment-${item.id}|">
+        <textarea placeholder="Text" class="form-control" rows="3"></textarea>
+        <br/>
+        <p>
+            <button type="button" class="btn btn-success btn-sm" th:onclick="|sendComment(${item.id})|">
+                Add
+            </button>
+            <button type="button" class="btn btn-warning btn-sm"
+                    th:onclick="|cancelComment(${item.id})|">Cancel
+            </button>
+        </p>
+    </div>
+
+ </div>
+</body>
+</html>

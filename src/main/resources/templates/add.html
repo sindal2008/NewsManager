@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Add news</title>
+    <script th:src="@{/js/main.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <form th:action="@{/item/add}" method="post" th:object="${item}" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input required="required" class="form-control"
+                   placeholder="Title" th:field="*{title}" />
+            <label style="color: red; font-style: italic"
+                   th:if="${#fields.hasErrors()}" th:class="'error'">
+                The title can not be more than 255 characters</label>
+        </div>
+
+        <div class="form-group">
+            <label for="text">Text</label>
+            <textarea rows="15" cols="45"  required="required" class="form-control"
+                   placeholder="add your text here..." th:field="*{text}"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+</body>
+</html>

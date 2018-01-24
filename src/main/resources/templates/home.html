@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>News list page</title>
+
+</head>
+
+<body>
+<div layout:fragment="content">
+            <th:block th:each="item: ${items}">
+
+                <div class="well well-sm">
+                    <h4><a style="font-style: italic"
+                           th:href="@{|item/viewpage/${item.id}|}" th:text="${item.title}"></a>
+                    </h4>
+
+                    <h5 th:text="|Added ${item.createDate}|"></h5>
+                </div>
+            </th:block>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li th:if="${page &gt; 1}">
+                        <a th:href="@{|/?page=${page - 1}&amp;search=${search}|}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <li th:each="p: ${#numbers.sequence(1, totalPages)}">
+                        <a th:text="${p}" th:href="@{|?page=${p}&amp;search=${search}|}"></a>
+                    </li>
+
+                    <li th:if="${page &lt; totalPages}">
+                        <a th:href="@{|/?page=${page + 1}&amp;search=${search}|}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+
+</div>
+</body>
+</html>
