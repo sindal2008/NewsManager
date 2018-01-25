@@ -1,0 +1,4 @@
+A training project that implements a news manager. 
+Using Spring boot and MySQL database.
+
+Before starting the project, you must have a configured connection to the MySQL database and create a schema "news" in your database. 
